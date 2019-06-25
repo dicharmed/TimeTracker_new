@@ -6,13 +6,13 @@
     <div>
         <div class="panel-block">
             <div class="panel-item">
-                <asp:Button ID="Button1" runat="server" Enabled="False" OnClick="Button1_Click" Text="Начать работать" CssClass="panel-btn panel-btn--blocked" />
+                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Начать работать" CssClass="panel-btn panel-btn--active" />
             </div>
             <div class="panel-item">
                 <asp:Button ID="Button2" runat="server" Enabled="False" OnClick="Button2_Click" Text="Пауза" CssClass="panel-btn panel-btn--blocked" />
             </div>
             <div class="panel-item">
-                <asp:Button ID="Button3" runat="server" Enabled="False" OnClick="Button3_Click" Text="Завершить работу" CssClass="panel-btn panel-btn--blocked" />
+                <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Завершить работу" CssClass="panel-btn panel-btn--active" />
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                     <asp:Label ID="Label1" runat="server" Text="Тема: "></asp:Label>
                 </div>
                 <div>
-                    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="false" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
                 </div>
             </div>
         </div>

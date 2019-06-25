@@ -36,9 +36,6 @@ namespace TimeTracker
     partial void Insertpositions(positions instance);
     partial void Updatepositions(positions instance);
     partial void Deletepositions(positions instance);
-    partial void Insertschedule(schedule instance);
-    partial void Updateschedule(schedule instance);
-    partial void Deleteschedule(schedule instance);
     partial void Insertfaculties(faculties instance);
     partial void Updatefaculties(faculties instance);
     partial void Deletefaculties(faculties instance);
@@ -48,6 +45,9 @@ namespace TimeTracker
     partial void Insertinstitutes(institutes instance);
     partial void Updateinstitutes(institutes instance);
     partial void Deleteinstitutes(institutes instance);
+    partial void Insertschedule(schedule instance);
+    partial void Updateschedule(schedule instance);
+    partial void Deleteschedule(schedule instance);
     #endregion
 		
 		public employeesDataContextDataContext() : 
@@ -96,14 +96,6 @@ namespace TimeTracker
 			}
 		}
 		
-		public System.Data.Linq.Table<schedule> schedule
-		{
-			get
-			{
-				return this.GetTable<schedule>();
-			}
-		}
-		
 		public System.Data.Linq.Table<faculties> faculties
 		{
 			get
@@ -125,6 +117,14 @@ namespace TimeTracker
 			get
 			{
 				return this.GetTable<institutes>();
+			}
+		}
+		
+		public System.Data.Linq.Table<schedule> schedule
+		{
+			get
+			{
+				return this.GetTable<schedule>();
 			}
 		}
 	}
@@ -583,318 +583,6 @@ namespace TimeTracker
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.schedule")]
-	public partial class schedule : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_schedule_;
-		
-		private int _employes_id;
-		
-		private System.Nullable<System.DateTime> _data;
-		
-		private System.Nullable<System.TimeSpan> _started_to_work_time;
-		
-		private System.Nullable<System.TimeSpan> _ended_to_work_time;
-		
-		private int _activity_id;
-		
-		private System.Nullable<System.TimeSpan> _work_hours;
-		
-		private string _name_of_theme;
-		
-		private EntityRef<employees> _employees;
-		
-		private EntityRef<activities> _activities;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_schedule_Changing(int value);
-    partial void OnId_schedule_Changed();
-    partial void Onemployes_idChanging(int value);
-    partial void Onemployes_idChanged();
-    partial void OndataChanging(System.Nullable<System.DateTime> value);
-    partial void OndataChanged();
-    partial void Onstarted_to_work_timeChanging(System.Nullable<System.TimeSpan> value);
-    partial void Onstarted_to_work_timeChanged();
-    partial void Onended_to_work_timeChanging(System.Nullable<System.TimeSpan> value);
-    partial void Onended_to_work_timeChanged();
-    partial void Onactivity_idChanging(int value);
-    partial void Onactivity_idChanged();
-    partial void Onwork_hoursChanging(System.Nullable<System.TimeSpan> value);
-    partial void Onwork_hoursChanged();
-    partial void Onname_of_themeChanging(string value);
-    partial void Onname_of_themeChanged();
-    #endregion
-		
-		public schedule()
-		{
-			this._employees = default(EntityRef<employees>);
-			this._activities = default(EntityRef<activities>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Id_schedule ]", Storage="_Id_schedule_", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_schedule_
-		{
-			get
-			{
-				return this._Id_schedule_;
-			}
-			set
-			{
-				if ((this._Id_schedule_ != value))
-				{
-					this.OnId_schedule_Changing(value);
-					this.SendPropertyChanging();
-					this._Id_schedule_ = value;
-					this.SendPropertyChanged("Id_schedule_");
-					this.OnId_schedule_Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employes_id", DbType="Int NOT NULL")]
-		public int employes_id
-		{
-			get
-			{
-				return this._employes_id;
-			}
-			set
-			{
-				if ((this._employes_id != value))
-				{
-					if (this._employees.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onemployes_idChanging(value);
-					this.SendPropertyChanging();
-					this._employes_id = value;
-					this.SendPropertyChanged("employes_id");
-					this.Onemployes_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Date")]
-		public System.Nullable<System.DateTime> data
-		{
-			get
-			{
-				return this._data;
-			}
-			set
-			{
-				if ((this._data != value))
-				{
-					this.OndataChanging(value);
-					this.SendPropertyChanging();
-					this._data = value;
-					this.SendPropertyChanged("data");
-					this.OndataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_started_to_work_time", DbType="Time")]
-		public System.Nullable<System.TimeSpan> started_to_work_time
-		{
-			get
-			{
-				return this._started_to_work_time;
-			}
-			set
-			{
-				if ((this._started_to_work_time != value))
-				{
-					this.Onstarted_to_work_timeChanging(value);
-					this.SendPropertyChanging();
-					this._started_to_work_time = value;
-					this.SendPropertyChanged("started_to_work_time");
-					this.Onstarted_to_work_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ended_to_work_time", DbType="Time")]
-		public System.Nullable<System.TimeSpan> ended_to_work_time
-		{
-			get
-			{
-				return this._ended_to_work_time;
-			}
-			set
-			{
-				if ((this._ended_to_work_time != value))
-				{
-					this.Onended_to_work_timeChanging(value);
-					this.SendPropertyChanging();
-					this._ended_to_work_time = value;
-					this.SendPropertyChanged("ended_to_work_time");
-					this.Onended_to_work_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activity_id", DbType="Int NOT NULL")]
-		public int activity_id
-		{
-			get
-			{
-				return this._activity_id;
-			}
-			set
-			{
-				if ((this._activity_id != value))
-				{
-					if (this._activities.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onactivity_idChanging(value);
-					this.SendPropertyChanging();
-					this._activity_id = value;
-					this.SendPropertyChanged("activity_id");
-					this.Onactivity_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_work_hours", DbType="Time")]
-		public System.Nullable<System.TimeSpan> work_hours
-		{
-			get
-			{
-				return this._work_hours;
-			}
-			set
-			{
-				if ((this._work_hours != value))
-				{
-					this.Onwork_hoursChanging(value);
-					this.SendPropertyChanging();
-					this._work_hours = value;
-					this.SendPropertyChanged("work_hours");
-					this.Onwork_hoursChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name_of_theme", DbType="NVarChar(50)")]
-		public string name_of_theme
-		{
-			get
-			{
-				return this._name_of_theme;
-			}
-			set
-			{
-				if ((this._name_of_theme != value))
-				{
-					this.Onname_of_themeChanging(value);
-					this.SendPropertyChanging();
-					this._name_of_theme = value;
-					this.SendPropertyChanged("name_of_theme");
-					this.Onname_of_themeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employees_schedule", Storage="_employees", ThisKey="employes_id", OtherKey="id_employee", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public employees employees
-		{
-			get
-			{
-				return this._employees.Entity;
-			}
-			set
-			{
-				employees previousValue = this._employees.Entity;
-				if (((previousValue != value) 
-							|| (this._employees.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._employees.Entity = null;
-						previousValue.schedule.Remove(this);
-					}
-					this._employees.Entity = value;
-					if ((value != null))
-					{
-						value.schedule.Add(this);
-						this._employes_id = value.id_employee;
-					}
-					else
-					{
-						this._employes_id = default(int);
-					}
-					this.SendPropertyChanged("employees");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="activities_schedule", Storage="_activities", ThisKey="activity_id", OtherKey="Id_activity", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public activities activities
-		{
-			get
-			{
-				return this._activities.Entity;
-			}
-			set
-			{
-				activities previousValue = this._activities.Entity;
-				if (((previousValue != value) 
-							|| (this._activities.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._activities.Entity = null;
-						previousValue.schedule.Remove(this);
-					}
-					this._activities.Entity = value;
-					if ((value != null))
-					{
-						value.schedule.Add(this);
-						this._activity_id = value.Id_activity;
-					}
-					else
-					{
-						this._activity_id = default(int);
-					}
-					this.SendPropertyChanged("activities");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.faculties")]
 	public partial class faculties : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1299,6 +987,318 @@ namespace TimeTracker
 		{
 			this.SendPropertyChanging();
 			entity.institutes = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.schedule")]
+	public partial class schedule : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_schedule_;
+		
+		private int _employes_id;
+		
+		private System.Nullable<System.DateTime> _data;
+		
+		private System.Nullable<System.TimeSpan> _started_to_work_time;
+		
+		private System.Nullable<System.TimeSpan> _ended_to_work_time;
+		
+		private int _activity_id;
+		
+		private System.Nullable<System.TimeSpan> _work_hours;
+		
+		private string _name_of_theme;
+		
+		private EntityRef<activities> _activities;
+		
+		private EntityRef<employees> _employees;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_schedule_Changing(int value);
+    partial void OnId_schedule_Changed();
+    partial void Onemployes_idChanging(int value);
+    partial void Onemployes_idChanged();
+    partial void OndataChanging(System.Nullable<System.DateTime> value);
+    partial void OndataChanged();
+    partial void Onstarted_to_work_timeChanging(System.Nullable<System.TimeSpan> value);
+    partial void Onstarted_to_work_timeChanged();
+    partial void Onended_to_work_timeChanging(System.Nullable<System.TimeSpan> value);
+    partial void Onended_to_work_timeChanged();
+    partial void Onactivity_idChanging(int value);
+    partial void Onactivity_idChanged();
+    partial void Onwork_hoursChanging(System.Nullable<System.TimeSpan> value);
+    partial void Onwork_hoursChanged();
+    partial void Onname_of_themeChanging(string value);
+    partial void Onname_of_themeChanged();
+    #endregion
+		
+		public schedule()
+		{
+			this._activities = default(EntityRef<activities>);
+			this._employees = default(EntityRef<employees>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Id_schedule ]", Storage="_Id_schedule_", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_schedule_
+		{
+			get
+			{
+				return this._Id_schedule_;
+			}
+			set
+			{
+				if ((this._Id_schedule_ != value))
+				{
+					this.OnId_schedule_Changing(value);
+					this.SendPropertyChanging();
+					this._Id_schedule_ = value;
+					this.SendPropertyChanged("Id_schedule_");
+					this.OnId_schedule_Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employes_id", DbType="Int NOT NULL")]
+		public int employes_id
+		{
+			get
+			{
+				return this._employes_id;
+			}
+			set
+			{
+				if ((this._employes_id != value))
+				{
+					if (this._employees.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onemployes_idChanging(value);
+					this.SendPropertyChanging();
+					this._employes_id = value;
+					this.SendPropertyChanged("employes_id");
+					this.Onemployes_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Date")]
+		public System.Nullable<System.DateTime> data
+		{
+			get
+			{
+				return this._data;
+			}
+			set
+			{
+				if ((this._data != value))
+				{
+					this.OndataChanging(value);
+					this.SendPropertyChanging();
+					this._data = value;
+					this.SendPropertyChanged("data");
+					this.OndataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_started_to_work_time", DbType="Time")]
+		public System.Nullable<System.TimeSpan> started_to_work_time
+		{
+			get
+			{
+				return this._started_to_work_time;
+			}
+			set
+			{
+				if ((this._started_to_work_time != value))
+				{
+					this.Onstarted_to_work_timeChanging(value);
+					this.SendPropertyChanging();
+					this._started_to_work_time = value;
+					this.SendPropertyChanged("started_to_work_time");
+					this.Onstarted_to_work_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ended_to_work_time", DbType="Time")]
+		public System.Nullable<System.TimeSpan> ended_to_work_time
+		{
+			get
+			{
+				return this._ended_to_work_time;
+			}
+			set
+			{
+				if ((this._ended_to_work_time != value))
+				{
+					this.Onended_to_work_timeChanging(value);
+					this.SendPropertyChanging();
+					this._ended_to_work_time = value;
+					this.SendPropertyChanged("ended_to_work_time");
+					this.Onended_to_work_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activity_id", DbType="Int NOT NULL")]
+		public int activity_id
+		{
+			get
+			{
+				return this._activity_id;
+			}
+			set
+			{
+				if ((this._activity_id != value))
+				{
+					if (this._activities.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onactivity_idChanging(value);
+					this.SendPropertyChanging();
+					this._activity_id = value;
+					this.SendPropertyChanged("activity_id");
+					this.Onactivity_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_work_hours", DbType="Time")]
+		public System.Nullable<System.TimeSpan> work_hours
+		{
+			get
+			{
+				return this._work_hours;
+			}
+			set
+			{
+				if ((this._work_hours != value))
+				{
+					this.Onwork_hoursChanging(value);
+					this.SendPropertyChanging();
+					this._work_hours = value;
+					this.SendPropertyChanged("work_hours");
+					this.Onwork_hoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name_of_theme", DbType="NVarChar(50)")]
+		public string name_of_theme
+		{
+			get
+			{
+				return this._name_of_theme;
+			}
+			set
+			{
+				if ((this._name_of_theme != value))
+				{
+					this.Onname_of_themeChanging(value);
+					this.SendPropertyChanging();
+					this._name_of_theme = value;
+					this.SendPropertyChanged("name_of_theme");
+					this.Onname_of_themeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="activities_schedule", Storage="_activities", ThisKey="activity_id", OtherKey="Id_activity", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public activities activities
+		{
+			get
+			{
+				return this._activities.Entity;
+			}
+			set
+			{
+				activities previousValue = this._activities.Entity;
+				if (((previousValue != value) 
+							|| (this._activities.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._activities.Entity = null;
+						previousValue.schedule.Remove(this);
+					}
+					this._activities.Entity = value;
+					if ((value != null))
+					{
+						value.schedule.Add(this);
+						this._activity_id = value.Id_activity;
+					}
+					else
+					{
+						this._activity_id = default(int);
+					}
+					this.SendPropertyChanged("activities");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employees_schedule", Storage="_employees", ThisKey="employes_id", OtherKey="id_employee", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public employees employees
+		{
+			get
+			{
+				return this._employees.Entity;
+			}
+			set
+			{
+				employees previousValue = this._employees.Entity;
+				if (((previousValue != value) 
+							|| (this._employees.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._employees.Entity = null;
+						previousValue.schedule.Remove(this);
+					}
+					this._employees.Entity = value;
+					if ((value != null))
+					{
+						value.schedule.Add(this);
+						this._employes_id = value.id_employee;
+					}
+					else
+					{
+						this._employes_id = default(int);
+					}
+					this.SendPropertyChanged("employees");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

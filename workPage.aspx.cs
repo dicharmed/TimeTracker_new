@@ -21,36 +21,37 @@ namespace TimeTracker
 
         private DateTime getTime()
         {
-            //string time = DateTime.Now.ToLongTimeString();
-            //TimeSpan time = DateTime.Now.TimeOfDay;
             DateTime time = DateTime.Now;
             return time;
         }
 
         public void Button1_Click(object sender, EventArgs e)//START
         {
-            Button2.Enabled = true; //pause unlocked
-            Button1.Text = "Продолжить";
-            Button1.Enabled = false; //start locked
-
             Button1.CssClass = "panel-btn panel-btn--blocked";
             Button2.CssClass = "panel-btn panel-btn--active";
+            Button3.CssClass = "panel-btn panel-btn--blocked";
+
+            Button2.Enabled = true; //pause unlocked
+            Button1.Text = "Продолжить";
+            Button1.Enabled = false; //start locked   
+            Button3.Enabled = false; // finish unlocked
 
             DropDownList1.Enabled = false;
             TextBox1.Enabled = false;
 
             startTime = getTime(); 
             StartTimeTXT.Text = startTime.ToString();//START TIME
-
         }
 
         protected void Button2_Click(object sender, EventArgs e) //PAUSE
         {
             Button2.Enabled = false; //pause locked
-            Button1.Enabled = true; //start/continue locked
+            Button1.Enabled = true; //start/continue unlocked
+            Button3.Enabled = true; //finish unlocked
 
             Button1.CssClass = "panel-btn panel-btn--active";
             Button2.CssClass = "panel-btn panel-btn--blocked";
+            Button3.CssClass = "panel-btn panel-btn--active";
 
             pauseTime = getTime();
             PauseTimeTXT.Text = pauseTime.ToString();
@@ -71,34 +72,73 @@ namespace TimeTracker
         }
 
         protected void Button3_Click(object sender, EventArgs e) //FINISH
-        { 
-            try
+        {
+            if (StartTimeTXT.Text != "")
             {
-                finishTime = Convert.ToDateTime(PauseTimeTXT.Text);
-                workTime = TimeSpan.Parse(WorkTimeTXT.Text);
-            }
-            catch(Exception)
-            {
-                finishTime = getTime();
+                //--------panel
+                Button2.Enabled = false; //pause locked
+                Button1.Enabled = true; //start/continue locked
+                Button1.Text = "Начать работать";
+
+                Button1.CssClass = "panel-btn panel-btn--active";
+                Button2.CssClass = "panel-btn panel-btn--blocked";
+
                 startTime = Convert.ToDateTime(StartTimeTXT.Text);
-                workTime += finishTime - startTime;
-                WorkTimeTXT.Text = workTime.ToString();//FINISH TIME
+
+                try
+                {
+                    finishTime = Convert.ToDateTime(PauseTimeTXT.Text);
+                    workTime = TimeSpan.Parse(WorkTimeTXT.Text);
+
+                    if (TextBox1.Text == "")
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch (Exception)
+                {
+                    finishTime = getTime();
+
+                    workTime += finishTime - startTime;
+                    WorkTimeTXT.Text = workTime.ToString();//FINISH TIME
+
+                    TextBox1.Text = "Без названия";
+                }
+
+                //TO DATABASE
+                employeesDataContextDataContext db = new employeesDataContextDataContext();
+                int id_empl = Convert.ToInt32(Server.UrlDecode(Request.QueryString["id"].ToString()));
+
+                schedule NewSchedule = new schedule();
+
+                TimeSpan startTimetoDB = TimeSpan.Parse(startTime.ToLongTimeString());
+                TimeSpan finishTimetoDB = TimeSpan.Parse(finishTime.ToLongTimeString());
+
+                NewSchedule.employes_id = id_empl;
+                NewSchedule.data = DateTime.Today;
+                NewSchedule.started_to_work_time = startTimetoDB;
+                NewSchedule.ended_to_work_time = finishTimetoDB;
+                NewSchedule.activity_id = Convert.ToInt32(DropDownList1.Text);
+                NewSchedule.work_hours = workTime;
+                NewSchedule.name_of_theme = TextBox1.Text;
+
+                //Insert new record in tblmembers
+                db.schedule.InsertOnSubmit(NewSchedule);
+                //Update table  
+                db.SubmitChanges();
+                
+                //reset TXT
+                StartTimeTXT.Text = "";
+                PauseTimeTXT.Text = "";
+                WorkTimeTXT.Text = "";
+
+                //-------lecture+activity
+                DropDownList1.Enabled = true;
+                DropDownList1.SelectedIndex = 0;
+                TextBox1.Enabled = true;
+                TextBox1.Text = "";
             }
-
-            //-------lecture+activity
-            DropDownList1.Enabled = true;
-            DropDownList1.SelectedIndex = 0;
-            TextBox1.Enabled = true;
-            TextBox1.Text = "";
-
-            //--------panel
-            Button2.Enabled = false; //pause locked
-            Button1.Enabled = true; //start/continue locked
-            Button1.Text = "Начать работать";
-
-            Button1.CssClass = "panel-btn panel-btn--active";
-            Button2.CssClass = "panel-btn panel-btn--blocked";
-
+           
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -107,9 +147,9 @@ namespace TimeTracker
             {
                 Button1.Enabled = true;
                 Button3.Enabled = true;
-              
+
                 Button1.CssClass = "panel-btn panel-btn--active";
-                Button2.CssClass = "panel-btn panel-btn--active";
+                Button2.CssClass = "panel-btn panel-btn--blocked";
                 Button3.CssClass = "panel-btn panel-btn--active";
             }
             else
@@ -121,7 +161,6 @@ namespace TimeTracker
                 Button2.CssClass = "panel-btn panel-btn--blocked";
                 Button3.CssClass = "panel-btn panel-btn--blocked";
             }
-
         }
     }
 }
