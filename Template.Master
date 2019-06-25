@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Template.master.cs" Inherits="TimeTracker.Template" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div class="navbar">
+            <div class="container navbar-block">
+                <div class="navbar-header">
+                    <a class="navbar-brand" runat="server" href="~/">Система учета рабочего времени<br>
+                        сотрудников университета</a>
+                </div>
+                <div class="navbar-collapse">
+                    <div>
+                        <asp:Label ID="Label2" runat="server" Text="Labe2"></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container ">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="TimeTracker.employeesDataContextDataContext" EnableDelete="True" EnableInsert="True" EnableUpdate="True" EntityTypeName="" TableName="activities">
+        </asp:LinqDataSource>
+
+        <div class="footer">
+            <div class="container">CУРВС - 2019</div>                
+        </div>
+    </form>
+</body>
+</html>

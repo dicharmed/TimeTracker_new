@@ -1,0 +1,125 @@
+﻿.container {
+    margin: auto 0;
+    padding: 30px 10%;
+}
+.navbar {
+    background: #225c67;
+}
+.navbar-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-collapse div {
+    display: flex;
+    justify-content: flex-end;
+    color: #d1d8ea;
+}
+.navbar-header a {
+    font-size: 20px;
+    color: #d1d3d8;
+}
+
+a {
+    text-decoration: none;
+}
+.auth-block {
+    display: grid;
+    grid-row-gap: 15px;
+    
+}
+.input-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.msg {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.msg-error {
+    border: 1px solid #ff00008f;
+    background: #e5101042;
+    color: red;
+}
+
+.msg-success {
+    border: 1px solid #07831b94;
+    background: #18880552;
+    color: #065706;    
+}
+.inputs-wrapper {
+    display: grid;
+    grid-row-gap: 15px;
+    justify-content: center;
+}
+
+.margin-right {
+    margin-right: 40px;
+}
+
+.button-wrapper {
+    display: grid;
+    justify-content: center;
+}
+.btn {
+    background: #567ca9d4;
+    border: 2px solid #29457521;
+    color: white;
+    border-radius: 2px;
+    box-shadow: 1px 1px 4px 0px #597fad8f;
+    cursor: pointer;
+}
+
+.btn-pad {
+    padding: 5px 115px;
+}
+
+
+.panel-btn {
+    border-radius: 2px;
+    box-shadow: 1px 1px 4px 0px #597fad8f;
+    min-width: 200px;
+    padding: 4px 0;
+}
+
+.panel-btn--active {
+    background: #567ca9d4;
+    border: 2px solid #29457521;
+    color: white;
+    cursor: pointer;
+}
+.panel-btn--blocked {
+    background: #8e9194d4;
+    border: 2px solid #29457500;
+    color: #b7b7b7;
+    cursor: none;
+}
+
+.hide {
+    display: none;
+}
+
+.panel-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center; 
+    padding: 10px;
+    border: 1px solid #225c6757;
+    border-radius: 2px;
+    padding: 10px 20px;
+    margin-bottom: 40px;
+}
+.panel-item {
+    display:flex;
+    justify-content:center;
+}
+.footer {
+    background: #225c67;
+    color: #d1d3d8;
+    font-size: 12px;
+}

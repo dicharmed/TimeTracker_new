@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="time_track" Class="employeesDataContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\time_track.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="time_trackConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.employees" Member="employees">
+    <Type Name="employees">
+      <Column Name="id_employee" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="login" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="pswd" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="role" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="position" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="faculty_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="employees_schedule" Member="schedule" ThisKey="id_employee" OtherKey="employes_id" Type="schedule" />
+      <Association Name="positions_employees" Member="positions" ThisKey="position" OtherKey="Id_positions" Type="positions" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="faculties_employees" Member="faculties" ThisKey="faculty_id" OtherKey="Id_faculty" Type="faculties" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.positions" Member="positions">
+    <Type Name="positions">
+      <Column Name="Id_positions" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name_of_position" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="positions_employees" Member="employees" ThisKey="Id_positions" OtherKey="position" Type="employees" />
+    </Type>
+  </Table>
+  <Table Name="dbo.schedule" Member="schedule">
+    <Type Name="schedule">
+      <Column Name="[Id_schedule ]" Member="Id_schedule_" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="employes_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="data" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="started_to_work_time" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="ended_to_work_time" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="activity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="work_hours" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="name_of_theme" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="employees_schedule" Member="employees" ThisKey="employes_id" OtherKey="id_employee" Type="employees" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="activities_schedule" Member="activities" ThisKey="activity_id" OtherKey="Id_activity" Type="activities" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.faculties" Member="faculties">
+    <Type Name="faculties">
+      <Column Name="Id_faculty" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name_of_faculty" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="institute_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="faculties_employees" Member="employees" ThisKey="Id_faculty" OtherKey="faculty_id" Type="employees" />
+      <Association Name="institutes_faculties" Member="institutes" ThisKey="institute_id" OtherKey="Id_institute" Type="institutes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.activities" Member="activities">
+    <Type Name="activities">
+      <Column Name="Id_activity" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name_of_act" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="activities_schedule" Member="schedule" ThisKey="Id_activity" OtherKey="activity_id" Type="schedule" />
+    </Type>
+  </Table>
+  <Table Name="dbo.institutes" Member="institutes">
+    <Type Name="institutes">
+      <Column Name="Id_institute" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name_of_institute" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="institutes_faculties" Member="faculties" ThisKey="Id_institute" OtherKey="institute_id" Type="faculties" />
+    </Type>
+  </Table>
+</Database>
