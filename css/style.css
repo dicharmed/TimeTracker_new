@@ -118,6 +118,14 @@ a {
     display:flex;
     justify-content:center;
 }
+
+.title {
+    font-size: 25px;
+    text-align: center;
+    padding: 5px;
+    color: #225c67;
+    font-weight: bold;
+}
 .footer {
     background: #225c67;
     color: #d1d3d8;

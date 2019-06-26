@@ -66,8 +66,12 @@ namespace TimeTracker
                 workTime = new TimeSpan();
             }
 
-            workTime += pauseTime - startTime;
-            WorkTimeTXT.Text = workTime.ToString();//PAUSE TIME
+            //for TEST--> workTime should be 5 hrs
+            //startTime = new DateTime(2015, 7, 20, 23, 30, 25);
+            //pauseTime = new DateTime(2015, 7, 21, 04, 30, 25);
+
+            workTime += pauseTime - startTime;            
+            WorkTimeTXT.Text = workTime.ToString("hh':'mm':'ss");//PAUSE TIME
 
         }
 
@@ -100,7 +104,7 @@ namespace TimeTracker
                     finishTime = getTime();
 
                     workTime += finishTime - startTime;
-                    WorkTimeTXT.Text = workTime.ToString();//FINISH TIME
+                    WorkTimeTXT.Text = workTime.ToString("hh':'mm':'ss");//FINISH TIME
 
                     TextBox1.Text = "Без названия";
                 }

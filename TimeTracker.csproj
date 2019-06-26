@@ -75,7 +75,9 @@
     </Content>
     <Content Include="auth.aspx" />
     <Content Include="css\style.css" />
+    <Content Include="editActivities.aspx" />
     <Content Include="editEmplolyess.aspx" />
+    <Content Include="summaryPerDay.aspx" />
     <Content Include="Web.config" />
     <Content Include="workPage.aspx" />
   </ItemGroup>
@@ -86,6 +88,13 @@
     </Compile>
     <Compile Include="auth.aspx.designer.cs">
       <DependentUpon>auth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="editActivities.aspx.cs">
+      <DependentUpon>editActivities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="editActivities.aspx.designer.cs">
+      <DependentUpon>editActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="editEmplolyess.aspx.cs">
       <DependentUpon>editEmplolyess.aspx</DependentUpon>
@@ -100,6 +109,13 @@
       <DependentUpon>forEemployees.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="summaryPerDay.aspx.cs">
+      <DependentUpon>summaryPerDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="summaryPerDay.aspx.designer.cs">
+      <DependentUpon>summaryPerDay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Template.Master.cs">
       <DependentUpon>Template.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
