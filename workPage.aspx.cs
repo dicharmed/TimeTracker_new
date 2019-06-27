@@ -25,8 +25,10 @@ namespace TimeTracker
             return time;
         }
 
+      
+
         public void Button1_Click(object sender, EventArgs e)//START
-        {
+        {            
             Button1.CssClass = "panel-btn panel-btn--blocked";
             Button2.CssClass = "panel-btn panel-btn--active";
             Button3.CssClass = "panel-btn panel-btn--blocked";
@@ -39,7 +41,7 @@ namespace TimeTracker
             DropDownList1.Enabled = false;
             TextBox1.Enabled = false;
 
-            startTime = getTime(); 
+            startTime = getTime();
             StartTimeTXT.Text = startTime.ToString();//START TIME
         }
 
@@ -89,25 +91,47 @@ namespace TimeTracker
 
                 startTime = Convert.ToDateTime(StartTimeTXT.Text);
 
+                TimeSpan eightT = new TimeSpan(8, 0, 0);              
+
                 try
                 {
                     finishTime = Convert.ToDateTime(PauseTimeTXT.Text);
                     workTime = TimeSpan.Parse(WorkTimeTXT.Text);
+                    //workTime = new TimeSpan(15, 0, 0);
 
                     if (TextBox1.Text == "")
                     {
-                        throw new Exception();
+                        throw new Exception("emptyField");
                     }
+
+                    //if (workTime > eightT)
+                    //{
+                    //    throw new Exception("moreThanEight");
+                    //}
                 }
-                catch (Exception)
+                catch (Exception eR)
                 {
-                    finishTime = getTime();
+                    if(eR.ToString() == "emptyField")
+                    {
+                        finishTime = getTime();
+                        workTime += finishTime - startTime;
+                        WorkTimeTXT.Text = workTime.ToString("hh':'mm':'ss");//FINISH TIME
+                        TextBox1.Text = "Без названия";
+                    }
 
-                    workTime += finishTime - startTime;
-                    WorkTimeTXT.Text = workTime.ToString("hh':'mm':'ss");//FINISH TIME
+                    //if (eR.ToString() == "moreThanEight")
+                    //{
+                    //    workTime = new TimeSpan(8, 0, 0);           
+                       
+                    //}
 
-                    TextBox1.Text = "Без названия";
                 }
+
+                if (workTime > eightT)
+                {
+                    workTime = new TimeSpan(8, 0, 0);
+                }
+
 
                 //TO DATABASE
                 employeesDataContextDataContext db = new employeesDataContextDataContext();
@@ -117,9 +141,10 @@ namespace TimeTracker
 
                 TimeSpan startTimetoDB = TimeSpan.Parse(startTime.ToLongTimeString());
                 TimeSpan finishTimetoDB = TimeSpan.Parse(finishTime.ToLongTimeString());
+                DateTime daTEtoDB = DateTime.Today;
 
                 NewSchedule.employes_id = id_empl;
-                NewSchedule.data = DateTime.Today;
+                NewSchedule.data = daTEtoDB;
                 NewSchedule.started_to_work_time = startTimetoDB;
                 NewSchedule.ended_to_work_time = finishTimetoDB;
                 NewSchedule.activity_id = Convert.ToInt32(DropDownList1.Text);
@@ -130,6 +155,7 @@ namespace TimeTracker
                 db.schedule.InsertOnSubmit(NewSchedule);
                 //Update table  
                 db.SubmitChanges();
+
                 
                 //reset TXT
                 StartTimeTXT.Text = "";
@@ -145,6 +171,7 @@ namespace TimeTracker
            
         }
 
+       
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
             if (TextBox1.Text != "")
