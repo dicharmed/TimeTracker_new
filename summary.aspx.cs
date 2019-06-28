@@ -41,7 +41,8 @@ namespace TimeTracker
             {
                 for (int j = 1; j < GridView1.Columns.Count; j++)
                 {
-                    worksheet.Rows[i].Columns[j] = GridView1.Rows[i - 1].Cells[j - 1].Text;
+                    worksheet.Rows[1].Columns[j] = GridView1.Columns[j - 1].HeaderText;                    
+                    worksheet.Rows[i + 1].Columns[j] = GridView1.Rows[i - 1].Cells[j - 1].Text;
                 }
             }
 
