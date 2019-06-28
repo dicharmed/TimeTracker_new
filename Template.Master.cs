@@ -19,6 +19,7 @@ namespace TimeTracker
 
                 var employee = (from a in db.employees where a.id_employee == getId select a).FirstOrDefault(); //get the needed log from db
 
+        
                 //fio
                 string l_name = Convert.ToString(employee.last_name);
                 l_name = System.Text.RegularExpressions.Regex.Replace(l_name, @"\s+", ""); //remove spaces
@@ -31,7 +32,7 @@ namespace TimeTracker
                 var positions = (from a in db.positions where a.Id_positions == post select a).FirstOrDefault();
                 string pos_of_emp = Convert.ToString(positions.name_of_position);
 
-                Label1.Text = l_name + " " + f_name + ", " + pos_of_emp;
+                Label1.Text = l_name + " " + f_name + ", " + pos_of_emp;              
 
                 Label2.Text = DateTime.Today.ToShortDateString();
 
@@ -40,10 +41,11 @@ namespace TimeTracker
                 getId = 0;
                 Label1.Text = "";
                 Label2.Text = "";
-            }
-            
 
-          
+  
+            }
+
+
 
         }
 

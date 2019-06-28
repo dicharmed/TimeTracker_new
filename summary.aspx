@@ -31,8 +31,11 @@
         </div>
 
         <div class="button-wrapper">
-            <asp:Button ID="Button1" runat="server" Text="Получить отчет" CssClass="btn btn-pad" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="Получить отчет" CssClass="btn btn-pad mB" OnClick="Button1_Click" />        
+   
+            <asp:Button ID="Button2" runat="server" Text="Сохранить в Excel" CssClass="btn btn-pad panel-btn--blocked" OnClick="Button2_Click" />        
         </div>
+        
         <div>
             <asp:GridView ID="GridView1" runat="server" CssClass="" AutoGenerateColumns="False">
                 <Columns>

@@ -4,7 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div>
-
         <asp:Label ID="Label6" runat="server"></asp:Label>
 
         <div class="inputs-wrapper">
@@ -71,11 +70,11 @@
                     <asp:SqlDataSource ID="SqlDataSource3_cafedra" runat="server" ConnectionString="<%$ ConnectionStrings:time_trackConnectionString %>" SelectCommand="SELECT * FROM [faculties], [employees] WHERE [Id_faculty] = [faculty_id]"></asp:SqlDataSource>
                     </ItemTemplate>
                 </asp:TemplateField>  --%>
-                        <asp:BoundField DataField="id_employee" HeaderText="" SortExpression="id_employee" ItemStyle-CssClass="hide" HeaderStyle-CssClass="hide" >
+                        <asp:BoundField DataField="id_employee" HeaderText="" SortExpression="id_employee" ItemStyle-CssClass="hide" HeaderStyle-CssClass="hide">
 
-<HeaderStyle CssClass="hide"></HeaderStyle>
+                            <HeaderStyle CssClass="hide"></HeaderStyle>
 
-<ItemStyle CssClass="hide"></ItemStyle>
+                            <ItemStyle CssClass="hide"></ItemStyle>
                         </asp:BoundField>
 
                         <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />

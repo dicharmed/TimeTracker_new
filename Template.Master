@@ -21,10 +21,19 @@
                 </div>
                 <div class="navbar-collapse">
                     <div>
-                        <asp:Label ID="Label2" runat="server" Text="Labe2"></asp:Label>
+                        <asp:Label ID="editEm" runat="server" Text="" Visible="false"> <a class="color-for-a" runat="server" href="~/editEmplolyess.aspx">Редактировать список сотрудников</a></asp:Label>
                     </div>
                     <div>
-                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                        <asp:Label ID="editAc" runat="server" Text="" Visible="false"><a class="color-for-a" runat="server" href="~/editActivities.aspx">Редактировать список видов деятельности</a></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="getSummary" runat="server" Text="" Visible="false"><a class="color-for-a" runat="server" href="~/summary.aspx">Сформировать отчет</a></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
                     </div>
                 </div>
             </div>
@@ -39,7 +48,7 @@
         </asp:LinqDataSource>
 
         <div class="footer">
-            <div class="container">CУРВС - 2019</div>                
+            <div class="container">CУРВС - 2019</div>
         </div>
     </form>
 </body>

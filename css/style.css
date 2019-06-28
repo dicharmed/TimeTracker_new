@@ -15,6 +15,9 @@
     justify-content: flex-end;
     color: #d1d8ea;
 }
+.color-for-a {
+    color: white;
+}
 .navbar-header a {
     font-size: 20px;
     color: #d1d3d8;
@@ -78,7 +81,9 @@ a {
 .btn-pad {
     padding: 5px 115px;
 }
-
+.mB{
+    margin-bottom: 20px;
+}
 
 .panel-btn {
     border-radius: 2px;

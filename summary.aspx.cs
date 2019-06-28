@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.Office.Interop.Excel;
 
 namespace TimeTracker
 {
@@ -15,7 +16,38 @@ namespace TimeTracker
         {
             Label3.Text = "";
             Label3.CssClass = "";
-          
+
+            if(TextBox2.Text != "")
+            {
+                BindGridView();
+            }
+
+            System.Web.UI.WebControls.Label editEm = (System.Web.UI.WebControls.Label)Master.FindControl("editEm");
+            System.Web.UI.WebControls.Label editAc = (System.Web.UI.WebControls.Label)Master.FindControl("editAc");
+            System.Web.UI.WebControls.Label getSummary = (System.Web.UI.WebControls.Label)Master.FindControl("getSummary");
+
+            editEm.Visible = true;
+            editAc.Visible = true;
+            getSummary.Visible = true;
+        }
+
+        protected void ToExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application excelapp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workbook = excelapp.Workbooks.Add();
+            Microsoft.Office.Interop.Excel.Worksheet worksheet = workbook.ActiveSheet;
+
+            for (int i = 1; i < GridView1.Rows.Count + 1; i++)
+            {
+                for (int j = 1; j < GridView1.Columns.Count; j++)
+                {
+                    worksheet.Rows[i].Columns[j] = GridView1.Rows[i - 1].Cells[j - 1].Text;
+                }
+            }
+
+            excelapp.AlertBeforeOverwriting = false;
+            workbook.SaveAs(@"C:\Users\Xiaomi\source\repos\TimeTracker\Отчет.xls");
+            excelapp.Quit();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -64,6 +96,7 @@ namespace TimeTracker
             TimeSpan s = getSUM();
             GridView1.Rows[0].Cells[8].Text = s.ToString();
 
+            Button2.CssClass = "btn btn-pad panel-btn--active";
 
             //TableCell b = new TableCell();
             //b.Text = s.ToString();
@@ -115,6 +148,11 @@ namespace TimeTracker
             }
 
             return summ;
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            ToExcel();
         }
 
 

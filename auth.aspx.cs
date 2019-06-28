@@ -13,7 +13,7 @@ namespace TimeTracker
         static public string login;
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace TimeTracker
                     if (role == "admin")
                     {
                         //Response.Redirect("/editEmplolyess.aspx");
-                        Response.Redirect("editEmplolyess.aspx?id=" + Server.UrlEncode(id.ToString()));
+                        Response.Redirect("editEmplolyess.aspx?id=" + Server.UrlEncode(id.ToString()));                    
                     }
                     else
                     {

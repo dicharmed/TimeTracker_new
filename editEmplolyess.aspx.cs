@@ -16,6 +16,14 @@ namespace TimeTracker
                 BindGridView();
             }
 
+            Label editEm = (Label)Master.FindControl("editEm");
+            Label editAc = (Label)Master.FindControl("editAc");
+            Label getSummary = (Label)Master.FindControl("getSummary");
+
+            editEm.Visible = true;
+            editAc.Visible = true;
+            getSummary.Visible = true;
+
         }
         protected void BindGridView()
         {
