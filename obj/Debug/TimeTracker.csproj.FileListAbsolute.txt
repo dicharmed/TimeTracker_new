@@ -54,3 +54,4 @@ C:\Users\Xiaomi\source\repos\TimeTracker\obj\Debug\TimeTracker.csproj.CopyComple
 C:\Users\Xiaomi\source\repos\TimeTracker\obj\Debug\TimeTracker.dll
 C:\Users\Xiaomi\source\repos\TimeTracker\obj\Debug\TimeTracker.pdb
 C:\Users\Xiaomi\source\repos\TimeTracker\obj\Debug\TimeTracker.csproj.ResolveComReference.cache
+C:\Users\Xiaomi\source\repos\TimeTracker\obj\Debug\TimeTracker.csprojAssemblyReference.cache
